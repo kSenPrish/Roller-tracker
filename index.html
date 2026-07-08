@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой роллер-прогресс</title>
+    <!-- ИКОНКА ВКЛАДКИ — СМАЙЛИК 🛼 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛼</text></svg>">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #b2dfdb 100%);
+            padding: 16px;
+            transition: all 0.4s;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; }
+
+        /* ===== ШАПКА ===== */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 16px 24px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+            margin-bottom: 16px;
+            border: 2px solid #8D6E63;
+            transition: all 0.4s;
+        }
+        header h1 {
+            font-size: 1.6rem;
+            color: #4E342E;
+        }
+        .goal {
+            font-size: 0.95rem;
+            color: #5D4037;
+            background: #EFEBE9;
+            padding: 4px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid #A1887F;
+        }
+        .no-scale-badge {
+            font-size: 0.8rem;
+            color: #fff;
+            background: #8D6E63;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .achievements {
+            font-size: 0.95rem;
+            color: #4E342E;
+            font-weight: 500;
+            background: rgba(141, 110, 99, 0.12);
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+        .theme-toggle {
+            padding: 8px 18px;
+            background: #6D4C41;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid #4E342E;
+        }
+        .theme-toggle:hover { transform: scale(1.05); background: #4E342E; }
+
+        /* ===== СТАТИСТИКА ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .stat-card {
+            background: white;
+            padding: 14px 18px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(139, 69, 19, 0.08);
+            transition: all 0.3s;
+            border: 2px solid #8D6E63;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(139, 69, 19, 0.15);
+            border-color: #6D4C41;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: #8D6E63;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #4E342E;
+        }
+
+        /* ===== КАРТОЧКИ ===== */
+        .three-columns {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr 1.5fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .card {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(139, 69, 19, 0.06);
+            transition: all 0.4s;
+            border: 2px solid #A1887F;
+        }
+        .card:hover {
+            border-color: #8D6E63;
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.12);
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            color: #4E342E;
+            margin-bottom: 10px;
+        }
+
+        /* ===== ПРОГРЕСС ===== */
+        .circle-chart-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 8px;
+        }
+        .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #4E342E;
+        }
+        .progress-info { text-align: center; font-size: 0.95rem; color: #6D4C41; }
+        .progress-info strong { color: #6D4C41; font-size: 1.1rem; }
+
+        /* ===== ФОРМЫ ===== */
+        .form-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        .form-row input, .form-row select {
+            padding: 8px 10px;
+            border: 1.5px solid #D7CCC8;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            flex: 1;
+            min-width: 60px;
+            transition: all 0.3s;
+            background: #FAF7F5;
+        }
+        .form-row input:focus {
+            border-color: #8D6E63;
+            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15);
+        }
+        .form-row input[readonly] { background: #EFEBE9; cursor: default; }
+        .form-row button {
+            padding: 8px 16px;
+            background: #6D4C41;
+            color: white;
+            border: 1px solid #4E342E;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .form-row button:hover { background: #4E342E; transform: scale(1.03); }
+        .btn-success { background: #6D4C41 !important; border-color: #4E342E !important; }
+        .btn-success:hover { background: #4E342E !important; }
+
+        .calc-hint { font-size: 0.75rem; color: #8D6E63; margin-bottom: 6px; }
+
+        /* ===== СПИСКИ ===== */
+        .scroll-list {
+            max-height: 150px;
+            overflow-y: auto;
+            margin: 6px 0;
+            padding-right: 4px;
+        }
+        .scroll-list::-webkit-scrollbar { width: 4px; }
+        .scroll-list::-webkit-scrollbar-track { background: #EFEBE9; border-radius: 10px; }
+        .scroll-list::-webkit-scrollbar-thumb { background: #A1887F; border-radius: 10px; }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 10px;
+            background: #FAF7F5;
+            border-radius: 6px;
+            margin-bottom: 3px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            border: 1px solid #EFEBE9;
+        }
+        .list-item:hover { background: #EFEBE9; border-color: #D7CCC8; }
+        .list-item .remove-item { color: #B71C1C; cursor: pointer; font-weight: bold; font-size: 1rem; padding: 0 4px; }
+        .list-item .remove-item:hover { transform: scale(1.3); }
+        .empty-message { color: #A1887F; text-align: center; font-size: 0.85rem; padding: 12px 0; }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #6D4C41;
+            padding: 6px 0;
+            border-top: 1.5px solid #EFEBE9;
+            margin-top: 4px;
+        }
+        .info-row strong { color: #4E342E; }
+
+        /* ===== АВТОДОПОЛНЕНИЕ ===== */
+        .autocomplete-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 60px;
+        }
+        .autocomplete-wrapper input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1.5px solid #D7CCC8;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s;
+            background: #FAF7F5;
+        }
+        .autocomplete-wrapper input:focus {
+            border-color: #8D6E63;
+            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15);
+        }
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1.5px solid #D7CCC8;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
+        }
+        .autocomplete-list.active { display: block; }
+        .autocomplete-item {
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #EFEBE9;
+            transition: all 0.2s;
+            color: #4E342E;
+        }
+        .autocomplete-item:hover { background: #EFEBE9; }
+        .autocomplete-item .kcal { color: #8D6E63; font-size: 0.75rem; }
+
+        .food-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 4px 0;
+        }
+        .food-presets button {
+            padding: 3px 10px;
+            background: #EFEBE9;
+            border: 1.5px solid #D7CCC8;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            color: #4E342E;
+        }
+        .food-presets button:hover { background: #8D6E63; color: white; transform: scale(1.05); border-color: #6D4C41; }
+
+        /* ===== НИЖНЯЯ СЕКЦИЯ ===== */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 0.6fr 0.5fr 1.5fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .bottom-section .card { padding: 14px 18px; }
+
+        .actions-row {
+            display: flex;
+            gap: 8px;
+            flex-direction: column;
+        }
+        .actions-row button {
+            padding: 8px 14px;
+            border: 1.5px solid #4E342E;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .actions-row button:hover { transform: scale(1.03); }
+        .btn-export { background: #6D4C41; color: white; }
+        .btn-export:hover { background: #4E342E; }
+        .btn-danger { background: #B71C1C; color: white; border-color: #880E4F; }
+        .btn-danger:hover { background: #880E4F; }
+
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+        .table-wrapper::-webkit-scrollbar { width: 4px; height: 4px; }
+        .table-wrapper::-webkit-scrollbar-track { background: #EFEBE9; border-radius: 10px; }
+        .table-wrapper::-webkit-scrollbar-thumb { background: #A1887F; border-radius: 10px; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        thead {
+            background: #6D4C41;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        th, td { padding: 5px 8px; text-align: left; border-bottom: 1px solid #EFEBE9; white-space: nowrap; }
+        tbody tr:hover { background: #FAF7F5; }
+
+        .no-weight-notice {
+            background: #FFF3E0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #E65100;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #FFCC80;
+        }
+        .no-weight-notice strong { color: #BF360C; }
+
+        /* ===== ТЁМНАЯ ТЕМА ===== */
+        body.dark {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.dark header {
+            background: #2d1f1a;
+            border-color: #6D4C41;
+            box-shadow: 0 4px 12px rgba(109, 76, 65, 0.2);
+        }
+        body.dark header h1 { color: #EFEBE9; }
+        body.dark .goal {
+            background: #3d2a24;
+            color: #A1887F;
+            border-color: #6D4C41;
+        }
+        body.dark .no-scale-badge { background: #8D6E63; color: #1a1a2e; }
+        body.dark .achievements { background: rgba(141, 110, 99, 0.2); color: #D7CCC8; }
+        body.dark .theme-toggle {
+            background: #6D4C41;
+            border-color: #4E342E;
+            color: #EFEBE9;
+        }
+        body.dark .theme-toggle:hover { background: #4E342E; }
+
+        body.dark .stat-card {
+            background: #2d1f1a;
+            border-color: #6D4C41;
+            box-shadow: 0 2px 8px rgba(109, 76, 65, 0.1);
+        }
+        body.dark .stat-card:hover {
+            box-shadow: 0 6px 16px rgba(109, 76, 65, 0.2);
+            border-color: #8D6E63;
+        }
+        body.dark .stat-value { color: #EFEBE9; }
+        body.dark .stat-label { color: #A1887F; }
+
+        body.dark .card {
+            background: #2d1f1a;
+            border-color: #6D4C41;
+            box-shadow: 0 2px 8px rgba(109, 76, 65, 0.06);
+        }
+        body.dark .card:hover {
+            border-color: #8D6E63;
+        }
+        body.dark .card h2 { color: #EFEBE9; }
+
+        body.dark .circle-text { color: #EFEBE9; }
+        body.dark .progress-info { color: #A1887F; }
+        body.dark .progress-info strong { color: #BCAAA4; }
+
+        body.dark .no-weight-notice {
+            background: #2d1f1a;
+            color: #FFB74D;
+            border-color: #6D4C41;
+        }
+        body.dark .no-weight-notice strong { color: #FFCC80; }
+
+        body.dark .form-row input {
+            background: #3d2a24;
+            border-color: #4E342E;
+            color: #EFEBE9;
+        }
+        body.dark .form-row input:focus {
+            border-color: #8D6E63;
+            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2);
+        }
+        body.dark .form-row input[readonly] { background: #2d1f1a; color: #A1887F; }
+        body.dark .form-row button {
+            background: #6D4C41;
+            border-color: #4E342E;
+            color: #EFEBE9;
+        }
+        body.dark .form-row button:hover { background: #4E342E; }
+
+        body.dark .list-item {
+            background: #3d2a24;
+            color: #EFEBE9;
+            border-color: #4E342E;
+        }
+        body.dark .list-item:hover { background: #4a342c; border-color: #6D4C41; }
+
+        body.dark .info-row {
+            color: #A1887F;
+            border-top-color: #4E342E;
+        }
+        body.dark .info-row strong { color: #EFEBE9; }
+
+        body.dark .food-presets button {
+            background: #3d2a24;
+            border-color: #4E342E;
+            color: #BCAAA4;
+        }
+        body.dark .food-presets button:hover { background: #6D4C41; color: white; border-color: #8D6E63; }
+
+        body.dark .autocomplete-wrapper input {
+            background: #3d2a24;
+            border-color: #4E342E;
+            color: #EFEBE9;
+        }
+        body.dark .autocomplete-wrapper input:focus {
+            border-color: #8D6E63;
+            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2);
+        }
+        body.dark .autocomplete-list {
+            background: #2d1f1a;
+            border-color: #4E342E;
+        }
+        body.dark .autocomplete-item {
+            color: #EFEBE9;
+            border-bottom-color: #3d2a24;
+        }
+        body.dark .autocomplete-item:hover { background: #3d2a24; }
+        body.dark .autocomplete-item .kcal { color: #A1887F; }
+
+        body.dark .calc-hint { color: #A1887F; }
+
+        body.dark .scroll-list::-webkit-scrollbar-track { background: #2d1f1a; }
+        body.dark .scroll-list::-webkit-scrollbar-thumb { background: #6D4C41; }
+
+        body.dark .table-wrapper::-webkit-scrollbar-track { background: #2d1f1a; }
+        body.dark .table-wrapper::-webkit-scrollbar-thumb { background: #6D4C41; }
+
+        body.dark .btn-export { background: #6D4C41; border-color: #4E342E; color: #EFEBE9; }
+        body.dark .btn-export:hover { background: #4E342E; }
+        body.dark .btn-danger { background: #B71C1C; border-color: #880E4F; color: #EFEBE9; }
+        body.dark .btn-danger:hover { background: #880E4F; }
+
+        body.dark thead { background: #3d2a24; }
+        body.dark th, body.dark td { border-bottom-color: #3d2a24; }
+        body.dark tbody tr:hover { background: #3d2a24; }
+
+        body.dark .empty-message { color: #6D4C41; }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 1024px) {
+            .three-columns { grid-template-columns: 1fr 1fr; }
+            .bottom-section { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .three-columns { grid-template-columns: 1fr; }
+            .bottom-section { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            header { flex-direction: column; text-align: center; }
+            header h1 { font-size: 1.3rem; }
+            .stat-value { font-size: 1.3rem; }
+            .form-row { flex-direction: column; }
+            .form-row input, .form-row button { width: 100%; }
+            .circle-chart-container { width: 120px; height: 120px; }
+            .circle-text { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🛼 Мой роллер-прогресс</h1>
+        <span class="goal">🎯 60 → 55 кг</span>
+        <span class="no-scale-badge">🚫 Без весов</span>
+        <span class="achievements" id="achievements">🌟 Начни путь!</span>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙 Тёмная</button>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">🔥 Сожжено</div>
+            <div class="stat-value" id="burnedCalories">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">🍽️ Съедено</div>
+            <div class="stat-value" id="eatenCalories">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">⚡ Дефицит</div>
+            <div class="stat-value" id="calorieDeficit">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">📈 Дней в трекинге</div>
+            <div class="stat-value" id="trackingDays">0</div>
+        </div>
+    </div>
+
+    <div class="three-columns">
+        <!-- Прогресс -->
+        <div class="card">
+            <h2>🎯 Прогресс</h2>
+            <div class="circle-chart-container">
+                <canvas id="circleChart" width="140" height="140"></canvas>
+                <div class="circle-text" id="progressPercent">0%</div>
+            </div>
+            <div class="progress-info">
+                🎯 Цель: 5 кг<br>
+                <span style="font-size:0.8rem; color:#8D6E63;">Следи за дефицитом калорий!</span>
+            </div>
+        </div>
+
+        <!-- Тренировка -->
+        <div class="card">
+            <h2>🛼 Тренировка</h2>
+            <div class="form-row">
+                <input type="number" id="hoursInput" placeholder="Часы" step="0.5" min="0">
+                <input type="number" id="kmInput" placeholder="Км" step="0.1" min="0">
+                <button onclick="addTraining()" class="btn-success">➕ Добавить</button>
+            </div>
+            <div class="calc-hint">🔥 вес × часы × 5 + (км/ч × 10) <span style="color:#8D6E63;">(вес ≈ 60 кг)</span></div>
+            <div class="scroll-list" id="trainingList"></div>
+            <div class="info-row">
+                <span>⏱️ <strong id="todayHours">0</strong> ч · <strong id="todayKm">0</strong> км</span>
+                <span>🔥 <strong id="todayBurned">0</strong> ккал</span>
+            </div>
+        </div>
+
+        <!-- Питание -->
+        <div class="card">
+            <h2>🍽️ Питание</h2>
+            <div class="form-row">
+                <div class="autocomplete-wrapper" style="flex: 2;">
+                    <input type="text" id="foodName" placeholder="Продукт..." oninput="showAutocomplete(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault(); addFood();}">
+                    <div class="autocomplete-list" id="autocompleteList"></div>
+                </div>
+                <input type="number" id="foodWeight" placeholder="Вес (г)" step="1" min="1" style="flex: 1;">
+                <input type="number" id="foodCalories" placeholder="Ккал/100г" step="1" readonly style="flex: 1; background:#EFEBE9;">
+                <button onclick="addFood()" style="flex: 0.6;">➕</button>
+            </div>
+            <div class="calc-hint">📐 Калории = (калорийность × вес) / 100</div>
+            <div class="food-presets">
+                <button onclick="quickAdd('Яблоко', 46)">🍎 Яблоко</button>
+                <button onclick="quickAdd('Банан', 90)">🍌 Банан</button>
+                <button onclick="quickAdd('Курица', 175)">🍗 Курица</button>
+                <button onclick="quickAdd('Рис', 328)">🍚 Рис</button>
+                <button onclick="quickAdd('Гречка', 338)">🌾 Гречка</button>
+                <button onclick="quickAdd('Овсянка', 350)">🥣 Овсянка</button>
+                <button onclick="quickAdd('Помидоры', 17)">🍅 Помидоры</button>
+                <button onclick="quickAdd('Огурцы', 15)">🥒 Огурцы</button>
+                <button onclick="quickAdd('Сметана 20%', 208)">🥛 Сметана</button>
+            </div>
+            <div class="scroll-list" id="foodList"></div>
+            <div class="info-row">
+                <span>📦 <strong id="todayFoodCount">0</strong> продуктов</span>
+                <span>📊 <strong id="todayFoodCalories">0</strong> ккал</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="card">
+            <h2>⚖️ Вес (опционально)</h2>
+            <div class="no-weight-notice">
+                ⚠️ <strong>Нет весов?</strong> Просто пропусти этот блок! Следи за дефицитом калорий — это главное.
+            </div>
+            <div class="form-row">
+                <input type="date" id="weightDate">
+                <input type="number" id="weightInput" placeholder="Вес (кг)" step="0.1">
+                <button onclick="saveDay()">💾 Сохранить</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ Действия</h2>
+            <div class="actions-row">
+                <button onclick="exportData()" class="btn-export">📥 Excel</button>
+                <button onclick="clearAll()" class="btn-danger">🗑️ Очистить</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 История</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Вес</th>
+                            <th>Тренировка</th>
+                            <th>🔥 Сожжено</th>
+                            <th>🍽️ Съедено</th>
+                            <th>⚡ Дефицит</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// ===== БАЗА ПРОДУКТОВ =====
+const FOOD_DB = [
+    { name: 'Молоко 3.2%', kcal: 60 }, { name: 'Кефир 3.2%', kcal: 59 },
+    { name: 'Кефир 1%', kcal: 38 }, { name: 'Кефир нежирный', kcal: 30 },
+    { name: 'Йогурт натуральный 1.5%', kcal: 51 }, { name: 'Ряженка', kcal: 85 },
+    { name: 'Простокваша', kcal: 58 }, { name: 'Сливки 10%', kcal: 119 },
+    { name: 'Сливки 20%', kcal: 208 }, { name: 'Сметана 10%', kcal: 116 },
+    { name: 'Сметана 20%', kcal: 208 }, { name: 'Творог жирный 18%', kcal: 231 },
+    { name: 'Творог полужирный 5%', kcal: 138 }, { name: 'Творог нежирный', kcal: 80 },
+    { name: 'Сыр голландский', kcal: 361 }, { name: 'Сыр Российский', kcal: 371 },
+    { name: 'Сыр плавленый', kcal: 240 }, { name: 'Брынза', kcal: 260 },
+    { name: 'Яйцо куриное', kcal: 154 }, { name: 'Говядина I категории', kcal: 191 },
+    { name: 'Говядина II категории', kcal: 106 }, { name: 'Телятина', kcal: 172 },
+    { name: 'Свинина мясная', kcal: 280 }, { name: 'Свинина жирная', kcal: 390 },
+    { name: 'Баранина', kcal: 208 }, { name: 'Курица', kcal: 175 },
+    { name: 'Индейка', kcal: 181 }, { name: 'Кролик', kcal: 176 },
+    { name: 'Гусь', kcal: 385 }, { name: 'Утка', kcal: 328 },
+    { name: 'Сало', kcal: 797 }, { name: 'Ветчина', kcal: 318 },
+    { name: 'Колбаса Докторская', kcal: 257 }, { name: 'Колбаса Любительская', kcal: 301 },
+    { name: 'Колбаса Краковская', kcal: 466 }, { name: 'Колбаса сырокопченая', kcal: 565 },
+    { name: 'Сосиски Молочные', kcal: 266 }, { name: 'Треска', kcal: 70 },
+    { name: 'Судак', kcal: 76 }, { name: 'Минтай', kcal: 68 },
+    { name: 'Хек', kcal: 84 }, { name: 'Щука', kcal: 83 },
+    { name: 'Карп', kcal: 104 }, { name: 'Горбуша', kcal: 146 },
+    { name: 'Лосось', kcal: 200 }, { name: 'Семга', kcal: 222 },
+    { name: 'Скумбрия', kcal: 158 }, { name: 'Сельдь соленая', kcal: 184 },
+    { name: 'Креветки', kcal: 82 }, { name: 'Кальмар', kcal: 77 },
+    { name: 'Икра лососевая', kcal: 263 }, { name: 'Гречка', kcal: 338 },
+    { name: 'Рис', kcal: 328 }, { name: 'Овсяные хлопья', kcal: 350 },
+    { name: 'Пшено', kcal: 334 }, { name: 'Манная крупа', kcal: 333 },
+    { name: 'Перловая крупа', kcal: 324 }, { name: 'Макароны', kcal: 336 },
+    { name: 'Горох', kcal: 295 }, { name: 'Фасоль', kcal: 310 },
+    { name: 'Хлеб ржаной', kcal: 220 }, { name: 'Хлеб пшеничный', kcal: 242 },
+    { name: 'Мука пшеничная', kcal: 338 }, { name: 'Капуста белокочанная', kcal: 25 },
+    { name: 'Капуста цветная', kcal: 23 }, { name: 'Картофель', kcal: 74 },
+    { name: 'Морковь', kcal: 34 }, { name: 'Лук репчатый', kcal: 45 },
+    { name: 'Огурцы', kcal: 15 }, { name: 'Помидоры', kcal: 17 },
+    { name: 'Свекла', kcal: 44 }, { name: 'Кабачки', kcal: 22 },
+    { name: 'Баклажаны', kcal: 26 }, { name: 'Перец сладкий', kcal: 25 },
+    { name: 'Редис', kcal: 18 }, { name: 'Яблоко', kcal: 46 },
+    { name: 'Груша', kcal: 43 }, { name: 'Банан', kcal: 90 },
+    { name: 'Виноград', kcal: 70 }, { name: 'Апельсин', kcal: 43 },
+    { name: 'Арбуз', kcal: 39 }, { name: 'Земляника', kcal: 40 },
+    { name: 'Вишня', kcal: 38 }, { name: 'Лимоны', kcal: 35 },
+    { name: 'Грецкие орехи', kcal: 637 }, { name: 'Арахис', kcal: 555 },
+    { name: 'Фундук', kcal: 701 }, { name: 'Семена подсолнечника', kcal: 582 },
+    { name: 'Изюм', kcal: 285 }, { name: 'Курага', kcal: 270 },
+    { name: 'Чернослив', kcal: 262 }, { name: 'Финики', kcal: 277 },
+    { name: 'Сахар', kcal: 382 }, { name: 'Мед', kcal: 320 },
+    { name: 'Молочный шоколад', kcal: 559 }, { name: 'Масло сливочное', kcal: 742 },
+    { name: 'Масло растительное', kcal: 885 }, { name: 'Майонез', kcal: 627 },
+    { name: 'Брокколи', kcal: 28 }, { name: 'Спаржа', kcal: 20 },
+    { name: 'Шпинат', kcal: 23 }, { name: 'Грибы белые', kcal: 34 },
+    { name: 'Грибы шампиньоны', kcal: 27 }, { name: 'Авокадо', kcal: 160 },
+    { name: 'Киви', kcal: 48 }, { name: 'Ананас', kcal: 50 },
+    { name: 'Манго', kcal: 60 }, { name: 'Персик', kcal: 45 },
+    { name: 'Абрикос', kcal: 44 }, { name: 'Слива', kcal: 42 },
+    { name: 'Черешня', kcal: 52 }, { name: 'Малина', kcal: 46 },
+    { name: 'Смородина', kcal: 44 }, { name: 'Клюква', kcal: 28 },
+    { name: 'Брусника', kcal: 43 }, { name: 'Голубика', kcal: 39 },
+    { name: 'Ежевика', kcal: 43 }, { name: 'Клубника', kcal: 41 },
+    { name: 'Гранат', kcal: 72 }, { name: 'Хурма', kcal: 67 },
+    { name: 'Инжир', kcal: 74 }, { name: 'Тыква', kcal: 22 },
+    { name: 'Патиссоны', kcal: 19 }, { name: 'Редька', kcal: 20 },
+    { name: 'Хрен', kcal: 44 }, { name: 'Чеснок', kcal: 106 },
+    { name: 'Петрушка', kcal: 36 }, { name: 'Укроп', kcal: 38 },
+    { name: 'Салат листовой', kcal: 12 }, { name: 'Руккола', kcal: 25 },
+    { name: 'Тофу', kcal: 73 }, { name: 'Соевый соус', kcal: 53 },
+    { name: 'Оливки', kcal: 115 }, { name: 'Маслины', kcal: 145 }
+];
+
+// ===== ДАННЫЕ =====
+let data = JSON.parse(localStorage.getItem('rollerData')) || [];
+let currentDay = {};
+
+function getToday() { return new Date().toISOString().split('T')[0]; }
+
+function getTodayData() {
+    const today = getToday();
+    if (!currentDay.date || currentDay.date !== today) {
+        currentDay = {
+            date: today,
+            trainings: [],
+            foods: [],
+            weight: null,
+            eaten: 0,
+            burned: 0
+        };
+        const saved = data.find(d => d.date === today);
+        if (saved) {
+            currentDay.trainings = saved.trainings || [];
+            currentDay.foods = saved.foods || [];
+            currentDay.weight = saved.weight || null;
+            currentDay.eaten = saved.eaten || 0;
+            currentDay.burned = saved.burned || 0;
+        }
+    }
+    return currentDay;
+}
+
+function saveCurrentDay() {
+    const today = getToday();
+    const day = getTodayData();
+    const existingIndex = data.findIndex(d => d.date === today);
+
+    const record = {
+        date: today,
+        weight: day.weight,
+        trainings: day.trainings,
+        foods: day.foods,
+        eaten: day.eaten,
+        burned: day.burned,
+        hours: day.trainings.reduce((sum, t) => sum + t.hours, 0),
+        km: day.trainings.reduce((sum, t) => sum + t.km, 0)
+    };
+
+    if (existingIndex !== -1) {
+        data[existingIndex] = record;
+    } else {
+        data.push(record);
+    }
+
+    data.sort((a, b) => new Date(a.date) - new Date(b.date));
+    localStorage.setItem('rollerData', JSON.stringify(data));
+    renderAll();
+}
+
+// ===== КАЛЬКУЛЯТОР ТРЕНИРОВКИ =====
+function calculateBurned(hours, km) {
+    if (hours === 0) return 0;
+    const weight = 60;
+    const speed = km / hours;
+    const base = weight * hours * 5;
+    const bonus = speed * 10;
+    return Math.round(base + bonus);
+}
+
+// ===== АВТОДОПОЛНЕНИЕ =====
+function showAutocomplete(query) {
+    const list = document.getElementById('autocompleteList');
+    if (!query || query.length < 1) {
+        list.classList.remove('active');
+        return;
+    }
+
+    const lower = query.toLowerCase();
+    const matches = FOOD_DB.filter(f => f.name.toLowerCase().includes(lower)).slice(0, 10);
+
+    if (matches.length === 0) {
+        list.classList.remove('active');
+        return;
+    }
+
+    list.innerHTML = matches.map(f => `
+        <div class="autocomplete-item" onclick="selectProduct('${f.name}', ${f.kcal})">
+            <span>${f.name}</span>
+            <span class="kcal">${f.kcal} ккал/100г</span>
+        </div>
+    `).join('');
+    list.classList.add('active');
+}
+
+function selectProduct(name, kcal) {
+    document.getElementById('foodName').value = name;
+    document.getElementById('foodCalories').value = kcal;
+    document.getElementById('autocompleteList').classList.remove('active');
+    document.getElementById('foodWeight').focus();
+}
+
+// ===== ДОБАВЛЕНИЕ ПРОДУКТА =====
+function addFood() {
+    const nameInput = document.getElementById('foodName');
+    const weightInput = document.getElementById('foodWeight');
+    const calInput = document.getElementById('foodCalories');
+
+    const name = nameInput.value.trim();
+    const weight = parseFloat(weightInput.value);
+    let kcalPer100 = parseFloat(calInput.value);
+
+    if (!name) {
+        alert('❌ Введите название продукта');
+        return;
+    }
+
+    if (!weight || weight <= 0) {
+        alert('❌ Введите вес в граммах');
+        return;
+    }
+
+    if (!kcalPer100 || isNaN(kcalPer100)) {
+        const found = FOOD_DB.find(f => f.name.toLowerCase() === name.toLowerCase());
+        if (found) {
+            kcalPer100 = found.kcal;
+            calInput.value = kcalPer100;
+        } else {
+            alert('❌ Продукт не найден в базе. Введите калорийность на 100г вручную.');
+            return;
+        }
+    }
+
+    const totalCalories = Math.round((kcalPer100 * weight) / 100);
+
+    const day = getTodayData();
+    day.foods.push({ name, weight, kcalPer100, totalCalories });
+    day.eaten += totalCalories;
+
+    nameInput.value = '';
+    weightInput.value = '';
+    calInput.value = '';
+    document.getElementById('autocompleteList').classList.remove('active');
+
+    saveCurrentDay();
+    playClickSound();
+}
+
+function quickAdd(name, kcal) {
+    document.getElementById('foodName').value = name;
+    document.getElementById('foodCalories').value = kcal;
+    document.getElementById('foodWeight').focus();
+}
+
+function removeFood(index) {
+    const day = getTodayData();
+    day.eaten -= day.foods[index].totalCalories;
+    day.foods.splice(index, 1);
+    saveCurrentDay();
+}
+
+// ===== ТРЕНИРОВКИ =====
+function addTraining() {
+    const hours = parseFloat(document.getElementById('hoursInput').value);
+    const km = parseFloat(document.getElementById('kmInput').value) || 0;
+
+    if (!hours || hours <= 0) {
+        alert('❌ Введите часы (> 0)');
+        return;
+    }
+
+    const day = getTodayData();
+    const burned = calculateBurned(hours, km);
+
+    day.trainings.push({ hours, km, burned });
+    day.burned += burned;
+
+    document.getElementById('hoursInput').value = '';
+    document.getElementById('kmInput').value = '';
+
+    saveCurrentDay();
+    playClickSound();
+}
+
+function removeTraining(index) {
+    const day = getTodayData();
+    day.burned -= day.trainings[index].burned;
+    day.trainings.splice(index, 1);
+    saveCurrentDay();
+}
+
+// ===== СОХРАНИТЬ ВЕС =====
+function saveDay() {
+    const date = document.getElementById('weightDate').value;
+    const weight = parseFloat(document.getElementById('weightInput').value);
+
+    if (!date) {
+        alert('❌ Выберите дату');
+        return;
+    }
+
+    const day = getTodayData();
+
+    if (weight && weight >= 30 && weight <= 200) {
+        day.weight = weight;
+    } else if (weight) {
+        alert('❌ Введите корректный вес (30-200 кг) или оставьте поле пустым');
+        return;
+    }
+
+    let totalBurned = 0;
+    day.trainings = day.trainings.map(t => {
+        const burned = calculateBurned(t.hours, t.km || 0);
+        totalBurned += burned;
+        return { ...t, burned };
+    });
+    day.burned = totalBurned;
+
+    document.getElementById('weightInput').value = '';
+    saveCurrentDay();
+    playClickSound();
+}
+
+// ===== ОТРИСОВКА =====
+function renderTrainingUI() {
+    const day = getTodayData();
+    const list = document.getElementById('trainingList');
+
+    if (day.trainings.length === 0) {
+        list.innerHTML = '<div class="empty-message">Нет тренировок</div>';
+    } else {
+        list.innerHTML = day.trainings.map((t, i) => `
+            <div class="list-item">
+                <span>⏱️ ${t.hours}ч ${t.km ? '| 🏃 ' + t.km + 'км' : ''}</span>
+                <span>🔥 ${t.burned} ккал <span class="remove-item" onclick="removeTraining(${i})">✕</span></span>
+            </div>
+        `).join('');
+    }
+
+    const totalHours = day.trainings.reduce((sum, t) => sum + t.hours, 0);
+    const totalKm = day.trainings.reduce((sum, t) => sum + t.km, 0);
+    document.getElementById('todayHours').textContent = totalHours.toFixed(1);
+    document.getElementById('todayKm').textContent = totalKm.toFixed(1);
+    document.getElementById('todayBurned').textContent = day.burned;
+}
+
+function renderFoodUI() {
+    const day = getTodayData();
+    const list = document.getElementById('foodList');
+
+    if (day.foods.length === 0) {
+        list.innerHTML = '<div class="empty-message">Нет записей о еде</div>';
+    } else {
+        list.innerHTML = day.foods.map((f, i) => `
+            <div class="list-item">
+                <span>${f.name} <span style="color:#8D6E63;font-size:0.75rem;">${f.weight}г</span></span>
+                <span>${f.totalCalories} ккал <span class="remove-item" onclick="removeFood(${i})">✕</span></span>
+            </div>
+        `).join('');
+    }
+
+    document.getElementById('todayFoodCount').textContent = day.foods.length;
+    document.getElementById('todayFoodCalories').textContent = day.eaten;
+}
+
+function renderHistory() {
+    const tbody = document.getElementById('historyBody');
+    if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#A1887F;">Нет записей</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = data.map(d => {
+        const hours = d.trainings ? d.trainings.reduce((s, t) => s + t.hours, 0) : 0;
+        const km = d.trainings ? d.trainings.reduce((s, t) => s + t.km, 0) : 0;
+        const deficit = (d.burned || 0) - (d.eaten || 0);
+        return `
+            <tr>
+                <td>${d.date}</td>
+                <td>${d.weight || '—'}</td>
+                <td>${hours > 0 ? hours.toFixed(1) + 'ч / ' + km.toFixed(1) + 'км' : '—'}</td>
+                <td>${d.burned || 0}</td>
+                <td>${d.eaten || 0}</td>
+                <td style="${deficit > 0 ? 'color:#6D4C41;' : 'color:#B71C1C;'}">${deficit}</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function updateStats() {
+    const totalBurned = data.reduce((sum, d) => sum + (d.burned || 0), 0);
+    const totalEaten = data.reduce((sum, d) => sum + (d.eaten || 0), 0);
+    const deficit = totalBurned - totalEaten;
+
+    document.getElementById('burnedCalories').textContent = totalBurned.toLocaleString();
+    document.getElementById('eatenCalories').textContent = totalEaten.toLocaleString();
+    document.getElementById('calorieDeficit').textContent = deficit.toLocaleString();
+
+    const days = data.filter(d => (d.trainings && d.trainings.length > 0) || (d.foods && d.foods.length > 0)).length;
+    document.getElementById('trackingDays').textContent = days;
+
+    const totalDeficit = data.reduce((sum, d) => sum + ((d.burned || 0) - (d.eaten || 0)), 0);
+    const progressKg = Math.min(Math.round(totalDeficit / 7700 * 10) / 10, 5);
+    document.getElementById('progressKg').textContent = progressKg.toFixed(1);
+    const percent = Math.min(Math.round((progressKg / 5) * 100), 100);
+    document.getElementById('progressPercent').textContent = percent + '%';
+    updateCircleChart(percent);
+}
+
+function updateAchievements() {
+    const totalDeficit = data.reduce((sum, d) => sum + ((d.burned || 0) - (d.eaten || 0)), 0);
+    const lost = Math.min(Math.round(totalDeficit / 7700 * 10) / 10, 5);
+    const container = document.getElementById('achievements');
+
+    if (lost >= 5) container.textContent = '👑 ЦЕЛЬ ДОСТИГНУТА! 🎊';
+    else if (lost >= 4) container.textContent = '🔥 -4 кг! Последний рывок!';
+    else if (lost >= 3) container.textContent = '🎉 -3 кг! Ты богиня!';
+    else if (lost >= 2) container.textContent = '⭐ -2 кг! Невероятно!';
+    else if (lost >= 1) container.textContent = '🏆 -1 кг! Ты супер!';
+    else if (data.length > 0) container.textContent = '💪 Продолжай в том же духе!';
+    else container.textContent = '🌟 Начни путь!';
+}
+
+function renderAll() {
+    renderTrainingUI();
+    renderFoodUI();
+    renderHistory();
+    updateStats();
+    updateWeightChart();
+    updateAchievements();
+}
+
+// ===== ГРАФИКИ =====
+let weightChart = null;
+let circleChart = null;
+
+function initCharts() {
+    const ctx = document.getElementById('weightChart');
+    if (ctx) {
+        weightChart = new Chart(ctx, {
+            type: 'line',
+            data: { labels: [], datasets: [{ label: 'Вес (кг)', data: [], borderColor: '#6D4C41', backgroundColor: 'rgba(109,76,65,0.1)', tension: 0.3, fill: true, pointBackgroundColor: '#6D4C41' }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'top' } }, scales: { y: { min: 50, max: 65 } } }
+        });
+        updateWeightChart();
+    }
+
+    const circleCtx = document.getElementById('circleChart').getContext('2d');
+    circleChart = new Chart(circleCtx, {
+        type: 'doughnut',
+        data: { labels: ['Прогресс', 'Осталось'], datasets: [{ data: [0, 100], backgroundColor: ['#6D4C41', '#EFEBE9'], borderWidth: 0 }] },
+        options: { cutout: '75%', responsive: false, plugins: { legend: { display: false } } }
+    });
+}
+
+function updateWeightChart() {
+    if (!weightChart) return;
+    const records = data.filter(d => d.weight);
+    weightChart.data.labels = records.map(d => d.date);
+    weightChart.data.datasets[0].data = records.map(d => d.weight);
+    weightChart.update();
+}
+
+function updateCircleChart(percent) {
+    if (!circleChart) return;
+    const progress = Math.min(percent, 100);
+    circleChart.data.datasets[0].data = [progress, 100 - progress];
+    circleChart.update();
+}
+
+// ===== ЗВУК =====
+function playClickSound() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 800;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.12);
+    } catch(e) {}
+}
+
+// ===== ТЕМА =====
+function toggleTheme() {
+    document.body.classList.toggle('dark');
+    const btn = document.querySelector('.theme-toggle');
+    if (document.body.classList.contains('dark')) {
+        btn.textContent = '☀️ Светлая';
+        localStorage.setItem('darkTheme', 'true');
+    } else {
+        btn.textContent = '🌙 Тёмная';
+        localStorage.setItem('darkTheme', 'false');
+    }
+}
+
+function loadTheme() {
+    if (localStorage.getItem('darkTheme') === 'true') {
+        document.body.classList.add('dark');
+        document.querySelector('.theme-toggle').textContent = '☀️ Светлая';
+    }
+}
+
+// ===== ЭКСПОРТ =====
+function exportData() {
+    if (data.length === 0) {
+        alert('Нет данных для экспорта');
+        return;
+    }
+    let csv = 'Дата,Вес(кг),Съедено(ккал),Сожжено(ккал),Дефицит\n';
+    data.forEach(d => {
+        const deficit = (d.burned || 0) - (d.eaten || 0);
+        csv += `${d.date},${d.weight || ''},${d.eaten || 0},${d.burned || 0},${deficit}\n`;
+    });
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `roller_progress_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    alert('✅ Данные скачаны!');
+}
+
+// ===== ОЧИСТКА =====
+function clearAll() {
+    if (confirm('🗑️ Точно удалить все данные?')) {
+        data = [];
+        localStorage.setItem('rollerData', JSON.stringify(data));
+        currentDay = {};
+        renderAll();
+        document.getElementById('progressPercent').textContent = '0%';
+        updateCircleChart(0);
+    }
+}
+
+// ===== ЗАПУСК =====
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('weightDate').valueAsDate = new Date();
+    loadTheme();
+    renderAll();
+    initCharts();
+});
+
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.autocomplete-wrapper')) {
+        document.getElementById('autocompleteList').classList.remove('active');
+    }
+});
+</script>
+</body>
+</html>
