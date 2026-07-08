@@ -2,11 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Мой роллер-прогресс</title>
-    <!-- ИКОНКА ВКЛАДКИ — СМАЙЛИК 🛼 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛼</text></svg>">
-
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,7 +19,7 @@
 
         .container { max-width: 1300px; margin: 0 auto; }
 
-        /* ===== ШАПКА ===== */
+        /* ===== ШАПКА (ПК) ===== */
         header {
             display: flex;
             align-items: center;
@@ -35,17 +34,17 @@
             border: 2px solid #8D6E63;
             transition: all 0.4s;
         }
-        header h1 {
-            font-size: 1.6rem;
-            color: #4E342E;
+        header h1 { 
+            font-size: 1.6rem; 
+            color: #4E342E; 
         }
-        .goal {
-            font-size: 0.95rem;
-            color: #5D4037;
-            background: #EFEBE9;
-            padding: 4px 18px;
-            border-radius: 20px;
-            font-weight: 600;
+        .goal { 
+            font-size: 0.95rem; 
+            color: #5D4037; 
+            background: #EFEBE9; 
+            padding: 4px 18px; 
+            border-radius: 20px; 
+            font-weight: 600; 
             border: 1px solid #A1887F;
         }
         .no-scale-badge {
@@ -56,28 +55,28 @@
             border-radius: 20px;
             font-weight: 600;
         }
-        .achievements {
-            font-size: 0.95rem;
-            color: #4E342E;
-            font-weight: 500;
-            background: rgba(141, 110, 99, 0.12);
-            padding: 4px 16px;
-            border-radius: 20px;
+        .achievements { 
+            font-size: 0.95rem; 
+            color: #4E342E; 
+            font-weight: 500; 
+            background: rgba(141, 110, 99, 0.12); 
+            padding: 4px 16px; 
+            border-radius: 20px; 
         }
-        .theme-toggle {
-            padding: 8px 18px;
-            background: #6D4C41;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
+        .theme-toggle { 
+            padding: 8px 18px; 
+            background: #6D4C41; 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 0.9rem; 
+            transition: all 0.3s; 
             border: 1px solid #4E342E;
         }
         .theme-toggle:hover { transform: scale(1.05); background: #4E342E; }
 
-        /* ===== СТАТИСТИКА ===== */
+        /* ===== СТАТИСТИКА (ПК) ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -93,24 +92,24 @@
             transition: all 0.3s;
             border: 2px solid #8D6E63;
         }
-        .stat-card:hover {
-            transform: translateY(-3px);
+        .stat-card:hover { 
+            transform: translateY(-3px); 
             box-shadow: 0 6px 16px rgba(139, 69, 19, 0.15);
             border-color: #6D4C41;
         }
-        .stat-label {
-            font-size: 0.7rem;
-            color: #8D6E63;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .stat-label { 
+            font-size: 0.7rem; 
+            color: #8D6E63; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
         }
-        .stat-value {
-            font-size: 1.7rem;
-            font-weight: 700;
-            color: #4E342E;
+        .stat-value { 
+            font-size: 1.7rem; 
+            font-weight: 700; 
+            color: #4E342E; 
         }
 
-        /* ===== КАРТОЧКИ ===== */
+        /* ===== КАРТОЧКИ (ПК) ===== */
         .three-columns {
             display: grid;
             grid-template-columns: 0.8fr 1.2fr 1.5fr;
@@ -129,10 +128,10 @@
             border-color: #8D6E63;
             box-shadow: 0 4px 12px rgba(139, 69, 19, 0.12);
         }
-        .card h2 {
-            font-size: 1.1rem;
-            color: #4E342E;
-            margin-bottom: 10px;
+        .card h2 { 
+            font-size: 1.1rem; 
+            color: #4E342E; 
+            margin-bottom: 10px; 
         }
 
         /* ===== ПРОГРЕСС ===== */
@@ -154,7 +153,7 @@
         .progress-info { text-align: center; font-size: 0.95rem; color: #6D4C41; }
         .progress-info strong { color: #6D4C41; font-size: 1.1rem; }
 
-        /* ===== ФОРМЫ ===== */
+        /* ===== ФОРМЫ (ПК) ===== */
         .form-row {
             display: flex;
             gap: 6px;
@@ -195,7 +194,7 @@
 
         .calc-hint { font-size: 0.75rem; color: #8D6E63; margin-bottom: 6px; }
 
-        /* ===== СПИСКИ ===== */
+        /* ===== СПИСКИ (ПК) ===== */
         .scroll-list {
             max-height: 150px;
             overflow-y: auto;
@@ -234,7 +233,7 @@
         }
         .info-row strong { color: #4E342E; }
 
-        /* ===== АВТОДОПОЛНЕНИЕ ===== */
+        /* ===== АВТОДОПОЛНЕНИЕ (ПК) ===== */
         .autocomplete-wrapper {
             position: relative;
             flex: 1;
@@ -301,7 +300,7 @@
         }
         .food-presets button:hover { background: #8D6E63; color: white; transform: scale(1.05); border-color: #6D4C41; }
 
-        /* ===== НИЖНЯЯ СЕКЦИЯ ===== */
+        /* ===== НИЖНЯЯ СЕКЦИЯ (ПК) ===== */
         .bottom-section {
             display: grid;
             grid-template-columns: 0.6fr 0.5fr 1.5fr;
@@ -340,12 +339,12 @@
         .table-wrapper::-webkit-scrollbar-thumb { background: #A1887F; border-radius: 10px; }
 
         table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-        thead {
-            background: #6D4C41;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+        thead { 
+            background: #6D4C41; 
+            color: white; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
         }
         th, td { padding: 5px 8px; text-align: left; border-bottom: 1px solid #EFEBE9; white-space: nowrap; }
         tbody tr:hover { background: #FAF7F5; }
@@ -364,7 +363,7 @@
         }
         .no-weight-notice strong { color: #BF360C; }
 
-        /* ===== ТЁМНАЯ ТЕМА ===== */
+        /* ===== ТЁМНАЯ ТЕМА (ПК) ===== */
         body.dark {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
@@ -375,15 +374,15 @@
             box-shadow: 0 4px 12px rgba(109, 76, 65, 0.2);
         }
         body.dark header h1 { color: #EFEBE9; }
-        body.dark .goal {
-            background: #3d2a24;
-            color: #A1887F;
+        body.dark .goal { 
+            background: #3d2a24; 
+            color: #A1887F; 
             border-color: #6D4C41;
         }
         body.dark .no-scale-badge { background: #8D6E63; color: #1a1a2e; }
         body.dark .achievements { background: rgba(141, 110, 99, 0.2); color: #D7CCC8; }
-        body.dark .theme-toggle {
-            background: #6D4C41;
+        body.dark .theme-toggle { 
+            background: #6D4C41; 
             border-color: #4E342E;
             color: #EFEBE9;
         }
@@ -394,7 +393,7 @@
             border-color: #6D4C41;
             box-shadow: 0 2px 8px rgba(109, 76, 65, 0.1);
         }
-        body.dark .stat-card:hover {
+        body.dark .stat-card:hover { 
             box-shadow: 0 6px 16px rgba(109, 76, 65, 0.2);
             border-color: #8D6E63;
         }
@@ -432,8 +431,8 @@
             box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2);
         }
         body.dark .form-row input[readonly] { background: #2d1f1a; color: #A1887F; }
-        body.dark .form-row button {
-            background: #6D4C41;
+        body.dark .form-row button { 
+            background: #6D4C41; 
             border-color: #4E342E;
             color: #EFEBE9;
         }
@@ -498,22 +497,75 @@
 
         body.dark .empty-message { color: #6D4C41; }
 
-        /* ===== АДАПТИВ ===== */
-        @media (max-width: 1024px) {
-            .three-columns { grid-template-columns: 1fr 1fr; }
-            .bottom-section { grid-template-columns: 1fr 1fr; }
-        }
+        /* ===== АДАПТИВ — ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ ===== */
         @media (max-width: 768px) {
-            .three-columns { grid-template-columns: 1fr; }
-            .bottom-section { grid-template-columns: 1fr; }
+            body { padding: 6px; }
+            
+            .three-columns { 
+                grid-template-columns: 1fr; 
+                gap: 6px;
+            }
+            .bottom-section { 
+                grid-template-columns: 1fr; 
+                gap: 6px;
+            }
+            .bottom-section .card { padding: 6px 8px; }
+            
+            .stats-grid { 
+                grid-template-columns: 1fr 1fr; 
+                gap: 4px;
+            }
+            .stat-card { padding: 4px 4px; }
+            .stat-value { font-size: 0.9rem; }
+            .stat-label { font-size: 0.45rem; }
+
+            header { 
+                padding: 6px 10px; 
+                gap: 4px;
+                flex-wrap: wrap;
+            }
+            header h1 { font-size: 1rem; }
+            .goal { font-size: 0.6rem; padding: 2px 8px; }
+            .no-scale-badge { font-size: 0.55rem; padding: 1px 6px; }
+            .achievements { font-size: 0.6rem; padding: 2px 8px; }
+            .theme-toggle { font-size: 0.6rem; padding: 3px 10px; }
+
+            .card { padding: 6px 8px; }
+            .card h2 { font-size: 0.7rem; margin-bottom: 4px; }
+
+            .form-row input { font-size: 0.65rem; padding: 3px 5px; min-width: 30px; }
+            .form-row button { font-size: 0.6rem; padding: 3px 8px; }
+            .calc-hint { font-size: 0.5rem; }
+
+            .circle-chart-container { width: 70px; height: 70px; }
+            .circle-text { font-size: 0.9rem; }
+            .progress-info { font-size: 0.6rem; }
+            .progress-info strong { font-size: 0.7rem; }
+
+            .scroll-list { max-height: 60px; }
+            .list-item { font-size: 0.6rem; padding: 2px 6px; }
+
+            .food-presets button { font-size: 0.5rem; padding: 1px 6px; }
+
+            .info-row { font-size: 0.55rem; padding: 2px 0; }
+
+            .autocomplete-wrapper input { font-size: 0.65rem; padding: 3px 5px; }
+            .autocomplete-item { font-size: 0.6rem; padding: 3px 8px; }
+            .autocomplete-item .kcal { font-size: 0.55rem; }
+
+            .table-wrapper { max-height: 70px; }
+            table { font-size: 0.55rem; }
+            th, td { padding: 2px 4px; }
+
+            .no-weight-notice { font-size: 0.55rem; padding: 3px 6px; }
+
+            .actions-row button { font-size: 0.6rem; padding: 3px 8px; }
+        }
+
+        @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr 1fr; }
-            header { flex-direction: column; text-align: center; }
-            header h1 { font-size: 1.3rem; }
-            .stat-value { font-size: 1.3rem; }
-            .form-row { flex-direction: column; }
-            .form-row input, .form-row button { width: 100%; }
-            .circle-chart-container { width: 120px; height: 120px; }
-            .circle-text { font-size: 1.3rem; }
+            .stat-value { font-size: 0.8rem; }
+            .stat-card { padding: 3px 3px; }
         }
     </style>
 </head>
@@ -522,7 +574,7 @@
 <div class="container">
     <header>
         <h1>🛼 Мой роллер-прогресс</h1>
-        <span class="goal">🎯 60 → 55 кг</span>
+        <span class="goal">🎯 60→55 кг</span>
         <span class="no-scale-badge">🚫 Без весов</span>
         <span class="achievements" id="achievements">🌟 Начни путь!</span>
         <button class="theme-toggle" onclick="toggleTheme()">🌙 Тёмная</button>
@@ -542,7 +594,7 @@
             <div class="stat-value" id="calorieDeficit">0</div>
         </div>
         <div class="stat-card">
-            <div class="stat-label">📈 Дней в трекинге</div>
+            <div class="stat-label">📈 Дней</div>
             <div class="stat-value" id="trackingDays">0</div>
         </div>
     </div>
@@ -557,7 +609,7 @@
             </div>
             <div class="progress-info">
                 🎯 Цель: 5 кг<br>
-                <span style="font-size:0.8rem; color:#8D6E63;">Следи за дефицитом калорий!</span>
+                <span style="font-size:0.8rem; color:#8D6E63;">Следи за дефицитом!</span>
             </div>
         </div>
 
@@ -567,9 +619,9 @@
             <div class="form-row">
                 <input type="number" id="hoursInput" placeholder="Часы" step="0.5" min="0">
                 <input type="number" id="kmInput" placeholder="Км" step="0.1" min="0">
-                <button onclick="addTraining()" class="btn-success">➕ Добавить</button>
+                <button onclick="addTraining()" class="btn-success">➕</button>
             </div>
-            <div class="calc-hint">🔥 вес × часы × 5 + (км/ч × 10) <span style="color:#8D6E63;">(вес ≈ 60 кг)</span></div>
+            <div class="calc-hint">🔥 (вес × часы × 5) + (км/ч × 10)</div>
             <div class="scroll-list" id="trainingList"></div>
             <div class="info-row">
                 <span>⏱️ <strong id="todayHours">0</strong> ч · <strong id="todayKm">0</strong> км</span>
@@ -585,25 +637,25 @@
                     <input type="text" id="foodName" placeholder="Продукт..." oninput="showAutocomplete(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault(); addFood();}">
                     <div class="autocomplete-list" id="autocompleteList"></div>
                 </div>
-                <input type="number" id="foodWeight" placeholder="Вес (г)" step="1" min="1" style="flex: 1;">
-                <input type="number" id="foodCalories" placeholder="Ккал/100г" step="1" readonly style="flex: 1; background:#EFEBE9;">
-                <button onclick="addFood()" style="flex: 0.6;">➕</button>
+                <input type="number" id="foodWeight" placeholder="г" step="1" min="1" style="flex: 0.8;">
+                <input type="number" id="foodCalories" placeholder="Ккал/100г" step="1" readonly style="flex: 0.8; background:#EFEBE9;">
+                <button onclick="addFood()" style="flex: 0.5;">➕</button>
             </div>
-            <div class="calc-hint">📐 Калории = (калорийность × вес) / 100</div>
+            <div class="calc-hint">📐 (калорийность × вес) / 100</div>
             <div class="food-presets">
-                <button onclick="quickAdd('Яблоко', 46)">🍎 Яблоко</button>
-                <button onclick="quickAdd('Банан', 90)">🍌 Банан</button>
-                <button onclick="quickAdd('Курица', 175)">🍗 Курица</button>
-                <button onclick="quickAdd('Рис', 328)">🍚 Рис</button>
-                <button onclick="quickAdd('Гречка', 338)">🌾 Гречка</button>
-                <button onclick="quickAdd('Овсянка', 350)">🥣 Овсянка</button>
-                <button onclick="quickAdd('Помидоры', 17)">🍅 Помидоры</button>
-                <button onclick="quickAdd('Огурцы', 15)">🥒 Огурцы</button>
-                <button onclick="quickAdd('Сметана 20%', 208)">🥛 Сметана</button>
+                <button onclick="quickAdd('Яблоко', 46)">🍎</button>
+                <button onclick="quickAdd('Банан', 90)">🍌</button>
+                <button onclick="quickAdd('Курица', 175)">🍗</button>
+                <button onclick="quickAdd('Рис', 328)">🍚</button>
+                <button onclick="quickAdd('Гречка', 338)">🌾</button>
+                <button onclick="quickAdd('Овсянка', 350)">🥣</button>
+                <button onclick="quickAdd('Помидоры', 17)">🍅</button>
+                <button onclick="quickAdd('Огурцы', 15)">🥒</button>
+                <button onclick="quickAdd('Сметана 20%', 208)">🥛</button>
             </div>
             <div class="scroll-list" id="foodList"></div>
             <div class="info-row">
-                <span>📦 <strong id="todayFoodCount">0</strong> продуктов</span>
+                <span>📦 <strong id="todayFoodCount">0</strong></span>
                 <span>📊 <strong id="todayFoodCalories">0</strong> ккал</span>
             </div>
         </div>
@@ -613,12 +665,12 @@
         <div class="card">
             <h2>⚖️ Вес (опционально)</h2>
             <div class="no-weight-notice">
-                ⚠️ <strong>Нет весов?</strong> Просто пропусти этот блок! Следи за дефицитом калорий — это главное.
+                ⚠️ <strong>Нет весов?</strong> Пропусти блок! Следи за дефицитом.
             </div>
             <div class="form-row">
                 <input type="date" id="weightDate">
                 <input type="number" id="weightInput" placeholder="Вес (кг)" step="0.1">
-                <button onclick="saveDay()">💾 Сохранить</button>
+                <button onclick="saveDay()">💾</button>
             </div>
         </div>
 
@@ -639,9 +691,9 @@
                             <th>Дата</th>
                             <th>Вес</th>
                             <th>Тренировка</th>
-                            <th>🔥 Сожжено</th>
-                            <th>🍽️ Съедено</th>
-                            <th>⚡ Дефицит</th>
+                            <th>🔥</th>
+                            <th>🍽️</th>
+                            <th>⚡</th>
                         </tr>
                     </thead>
                     <tbody id="historyBody"></tbody>
@@ -757,7 +809,7 @@ function saveCurrentDay() {
     const today = getToday();
     const day = getTodayData();
     const existingIndex = data.findIndex(d => d.date === today);
-
+    
     const record = {
         date: today,
         weight: day.weight,
@@ -827,7 +879,7 @@ function addFood() {
     const nameInput = document.getElementById('foodName');
     const weightInput = document.getElementById('foodWeight');
     const calInput = document.getElementById('foodCalories');
-
+    
     const name = nameInput.value.trim();
     const weight = parseFloat(weightInput.value);
     let kcalPer100 = parseFloat(calInput.value);
@@ -893,13 +945,13 @@ function addTraining() {
 
     const day = getTodayData();
     const burned = calculateBurned(hours, km);
-
+    
     day.trainings.push({ hours, km, burned });
     day.burned += burned;
 
     document.getElementById('hoursInput').value = '';
     document.getElementById('kmInput').value = '';
-
+    
     saveCurrentDay();
     playClickSound();
 }
@@ -922,7 +974,7 @@ function saveDay() {
     }
 
     const day = getTodayData();
-
+    
     if (weight && weight >= 30 && weight <= 200) {
         day.weight = weight;
     } else if (weight) {
@@ -947,7 +999,7 @@ function saveDay() {
 function renderTrainingUI() {
     const day = getTodayData();
     const list = document.getElementById('trainingList');
-
+    
     if (day.trainings.length === 0) {
         list.innerHTML = '<div class="empty-message">Нет тренировок</div>';
     } else {
@@ -969,13 +1021,13 @@ function renderTrainingUI() {
 function renderFoodUI() {
     const day = getTodayData();
     const list = document.getElementById('foodList');
-
+    
     if (day.foods.length === 0) {
         list.innerHTML = '<div class="empty-message">Нет записей о еде</div>';
     } else {
         list.innerHTML = day.foods.map((f, i) => `
             <div class="list-item">
-                <span>${f.name} <span style="color:#8D6E63;font-size:0.75rem;">${f.weight}г</span></span>
+                <span>${f.name} <span style="color:#8D6E63;font-size:0.6rem;">${f.weight}г</span></span>
                 <span>${f.totalCalories} ккал <span class="remove-item" onclick="removeFood(${i})">✕</span></span>
             </div>
         `).join('');
@@ -988,7 +1040,7 @@ function renderFoodUI() {
 function renderHistory() {
     const tbody = document.getElementById('historyBody');
     if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#A1887F;">Нет записей</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#A1887F; font-size:0.7rem;">Нет записей</td></tr>';
         return;
     }
 
@@ -1033,13 +1085,13 @@ function updateAchievements() {
     const totalDeficit = data.reduce((sum, d) => sum + ((d.burned || 0) - (d.eaten || 0)), 0);
     const lost = Math.min(Math.round(totalDeficit / 7700 * 10) / 10, 5);
     const container = document.getElementById('achievements');
-
+    
     if (lost >= 5) container.textContent = '👑 ЦЕЛЬ ДОСТИГНУТА! 🎊';
     else if (lost >= 4) container.textContent = '🔥 -4 кг! Последний рывок!';
     else if (lost >= 3) container.textContent = '🎉 -3 кг! Ты богиня!';
     else if (lost >= 2) container.textContent = '⭐ -2 кг! Невероятно!';
     else if (lost >= 1) container.textContent = '🏆 -1 кг! Ты супер!';
-    else if (data.length > 0) container.textContent = '💪 Продолжай в том же духе!';
+    else if (data.length > 0) container.textContent = '💪 Продолжай!';
     else container.textContent = '🌟 Начни путь!';
 }
 
@@ -1100,10 +1152,10 @@ function playClickSound() {
         gain.connect(ctx.destination);
         osc.frequency.value = 800;
         osc.type = 'sine';
-        gain.gain.setValueAtTime(0.15, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
         osc.start(ctx.currentTime);
-        osc.stop(ctx.currentTime + 0.12);
+        osc.stop(ctx.currentTime + 0.1);
     } catch(e) {}
 }
 
