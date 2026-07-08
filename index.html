@@ -34,46 +34,11 @@
             border: 2px solid #8D6E63;
             transition: all 0.4s;
         }
-        header h1 { 
-            font-size: 1.6rem; 
-            color: #4E342E; 
-        }
-        .goal { 
-            font-size: 0.95rem; 
-            color: #5D4037; 
-            background: #EFEBE9; 
-            padding: 4px 18px; 
-            border-radius: 20px; 
-            font-weight: 600; 
-            border: 1px solid #A1887F;
-        }
-        .no-scale-badge {
-            font-size: 0.8rem;
-            color: #fff;
-            background: #8D6E63;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-        .achievements { 
-            font-size: 0.95rem; 
-            color: #4E342E; 
-            font-weight: 500; 
-            background: rgba(141, 110, 99, 0.12); 
-            padding: 4px 16px; 
-            border-radius: 20px; 
-        }
-        .theme-toggle { 
-            padding: 8px 18px; 
-            background: #6D4C41; 
-            color: white; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-size: 0.9rem; 
-            transition: all 0.3s; 
-            border: 1px solid #4E342E;
-        }
+        header h1 { font-size: 1.6rem; color: #4E342E; }
+        .goal { font-size: 0.95rem; color: #5D4037; background: #EFEBE9; padding: 4px 18px; border-radius: 20px; font-weight: 600; border: 1px solid #A1887F; }
+        .no-scale-badge { font-size: 0.8rem; color: #fff; background: #8D6E63; padding: 4px 14px; border-radius: 20px; font-weight: 600; }
+        .achievements { font-size: 0.95rem; color: #4E342E; font-weight: 500; background: rgba(141, 110, 99, 0.12); padding: 4px 16px; border-radius: 20px; }
+        .theme-toggle { padding: 8px 18px; background: #6D4C41; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; border: 1px solid #4E342E; }
         .theme-toggle:hover { transform: scale(1.05); background: #4E342E; }
 
         /* ===== СТАТИСТИКА (ПК) ===== */
@@ -92,22 +57,9 @@
             transition: all 0.3s;
             border: 2px solid #8D6E63;
         }
-        .stat-card:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 6px 16px rgba(139, 69, 19, 0.15);
-            border-color: #6D4C41;
-        }
-        .stat-label { 
-            font-size: 0.7rem; 
-            color: #8D6E63; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-        }
-        .stat-value { 
-            font-size: 1.7rem; 
-            font-weight: 700; 
-            color: #4E342E; 
-        }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(139, 69, 19, 0.15); border-color: #6D4C41; }
+        .stat-label { font-size: 0.7rem; color: #8D6E63; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 1.7rem; font-weight: 700; color: #4E342E; }
 
         /* ===== КАРТОЧКИ (ПК) ===== */
         .three-columns {
@@ -124,15 +76,8 @@
             transition: all 0.4s;
             border: 2px solid #A1887F;
         }
-        .card:hover {
-            border-color: #8D6E63;
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.12);
-        }
-        .card h2 { 
-            font-size: 1.1rem; 
-            color: #4E342E; 
-            margin-bottom: 10px; 
-        }
+        .card:hover { border-color: #8D6E63; box-shadow: 0 4px 12px rgba(139, 69, 19, 0.12); }
+        .card h2 { font-size: 1.1rem; color: #4E342E; margin-bottom: 10px; }
 
         /* ===== ПРОГРЕСС ===== */
         .circle-chart-container {
@@ -171,10 +116,7 @@
             transition: all 0.3s;
             background: #FAF7F5;
         }
-        .form-row input:focus {
-            border-color: #8D6E63;
-            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15);
-        }
+        .form-row input:focus { border-color: #8D6E63; box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15); }
         .form-row input[readonly] { background: #EFEBE9; cursor: default; }
         .form-row button {
             padding: 8px 16px;
@@ -249,10 +191,7 @@
             transition: all 0.3s;
             background: #FAF7F5;
         }
-        .autocomplete-wrapper input:focus {
-            border-color: #8D6E63;
-            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15);
-        }
+        .autocomplete-wrapper input:focus { border-color: #8D6E63; box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.15); }
         .autocomplete-list {
             position: absolute;
             top: 100%;
@@ -339,13 +278,7 @@
         .table-wrapper::-webkit-scrollbar-thumb { background: #A1887F; border-radius: 10px; }
 
         table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-        thead { 
-            background: #6D4C41; 
-            color: white; 
-            position: sticky; 
-            top: 0; 
-            z-index: 10; 
-        }
+        thead { background: #6D4C41; color: white; position: sticky; top: 0; z-index: 10; }
         th, td { padding: 5px 8px; text-align: left; border-bottom: 1px solid #EFEBE9; white-space: nowrap; }
         tbody tr:hover { background: #FAF7F5; }
 
@@ -374,18 +307,10 @@
             box-shadow: 0 4px 12px rgba(109, 76, 65, 0.2);
         }
         body.dark header h1 { color: #EFEBE9; }
-        body.dark .goal { 
-            background: #3d2a24; 
-            color: #A1887F; 
-            border-color: #6D4C41;
-        }
+        body.dark .goal { background: #3d2a24; color: #A1887F; border-color: #6D4C41; }
         body.dark .no-scale-badge { background: #8D6E63; color: #1a1a2e; }
         body.dark .achievements { background: rgba(141, 110, 99, 0.2); color: #D7CCC8; }
-        body.dark .theme-toggle { 
-            background: #6D4C41; 
-            border-color: #4E342E;
-            color: #EFEBE9;
-        }
+        body.dark .theme-toggle { background: #6D4C41; border-color: #4E342E; color: #EFEBE9; }
         body.dark .theme-toggle:hover { background: #4E342E; }
 
         body.dark .stat-card {
@@ -393,10 +318,7 @@
             border-color: #6D4C41;
             box-shadow: 0 2px 8px rgba(109, 76, 65, 0.1);
         }
-        body.dark .stat-card:hover { 
-            box-shadow: 0 6px 16px rgba(109, 76, 65, 0.2);
-            border-color: #8D6E63;
-        }
+        body.dark .stat-card:hover { box-shadow: 0 6px 16px rgba(109, 76, 65, 0.2); border-color: #8D6E63; }
         body.dark .stat-value { color: #EFEBE9; }
         body.dark .stat-label { color: #A1887F; }
 
@@ -405,9 +327,7 @@
             border-color: #6D4C41;
             box-shadow: 0 2px 8px rgba(109, 76, 65, 0.06);
         }
-        body.dark .card:hover {
-            border-color: #8D6E63;
-        }
+        body.dark .card:hover { border-color: #8D6E63; }
         body.dark .card h2 { color: #EFEBE9; }
 
         body.dark .circle-text { color: #EFEBE9; }
@@ -426,16 +346,9 @@
             border-color: #4E342E;
             color: #EFEBE9;
         }
-        body.dark .form-row input:focus {
-            border-color: #8D6E63;
-            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2);
-        }
+        body.dark .form-row input:focus { border-color: #8D6E63; box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2); }
         body.dark .form-row input[readonly] { background: #2d1f1a; color: #A1887F; }
-        body.dark .form-row button { 
-            background: #6D4C41; 
-            border-color: #4E342E;
-            color: #EFEBE9;
-        }
+        body.dark .form-row button { background: #6D4C41; border-color: #4E342E; color: #EFEBE9; }
         body.dark .form-row button:hover { background: #4E342E; }
 
         body.dark .list-item {
@@ -463,10 +376,7 @@
             border-color: #4E342E;
             color: #EFEBE9;
         }
-        body.dark .autocomplete-wrapper input:focus {
-            border-color: #8D6E63;
-            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2);
-        }
+        body.dark .autocomplete-wrapper input:focus { border-color: #8D6E63; box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.2); }
         body.dark .autocomplete-list {
             background: #2d1f1a;
             border-color: #4E342E;
@@ -499,73 +409,106 @@
 
         /* ===== АДАПТИВ — ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ ===== */
         @media (max-width: 768px) {
-            body { padding: 6px; }
+            body { padding: 8px; }
             
+            /* Три верхние колонки — вертикально */
             .three-columns { 
                 grid-template-columns: 1fr; 
-                gap: 6px;
+                gap: 8px;
             }
-            .bottom-section { 
-                grid-template-columns: 1fr; 
-                gap: 6px;
-            }
-            .bottom-section .card { padding: 6px 8px; }
             
+            /* Статистика 2×2 */
             .stats-grid { 
                 grid-template-columns: 1fr 1fr; 
-                gap: 4px;
+                gap: 6px;
             }
-            .stat-card { padding: 4px 4px; }
-            .stat-value { font-size: 0.9rem; }
-            .stat-label { font-size: 0.45rem; }
+            .stat-card { padding: 6px 4px; }
+            .stat-value { font-size: 1.2rem; }
+            .stat-label { font-size: 0.55rem; }
 
+            /* Шапка компактная */
             header { 
-                padding: 6px 10px; 
-                gap: 4px;
+                padding: 8px 12px; 
+                gap: 6px;
                 flex-wrap: wrap;
             }
-            header h1 { font-size: 1rem; }
-            .goal { font-size: 0.6rem; padding: 2px 8px; }
-            .no-scale-badge { font-size: 0.55rem; padding: 1px 6px; }
-            .achievements { font-size: 0.6rem; padding: 2px 8px; }
-            .theme-toggle { font-size: 0.6rem; padding: 3px 10px; }
+            header h1 { font-size: 1.2rem; }
+            .goal { font-size: 0.7rem; padding: 2px 10px; }
+            .no-scale-badge { font-size: 0.65rem; padding: 1px 8px; }
+            .achievements { font-size: 0.7rem; padding: 2px 10px; }
+            .theme-toggle { font-size: 0.7rem; padding: 4px 12px; }
 
-            .card { padding: 6px 8px; }
-            .card h2 { font-size: 0.7rem; margin-bottom: 4px; }
+            /* Карточки */
+            .card { padding: 10px 12px; }
+            .card h2 { font-size: 0.95rem; margin-bottom: 6px; }
 
-            .form-row input { font-size: 0.65rem; padding: 3px 5px; min-width: 30px; }
-            .form-row button { font-size: 0.6rem; padding: 3px 8px; }
-            .calc-hint { font-size: 0.5rem; }
+            /* Поля ввода и кнопки — больше для пальцев */
+            .form-row input { 
+                font-size: 0.9rem; 
+                padding: 8px 10px; 
+                min-width: 50px; 
+            }
+            .form-row button { 
+                font-size: 0.85rem; 
+                padding: 8px 14px; 
+            }
+            .calc-hint { font-size: 0.65rem; }
 
-            .circle-chart-container { width: 70px; height: 70px; }
-            .circle-text { font-size: 0.9rem; }
-            .progress-info { font-size: 0.6rem; }
-            .progress-info strong { font-size: 0.7rem; }
+            /* Круг */
+            .circle-chart-container { width: 100px; height: 100px; }
+            .circle-text { font-size: 1.2rem; }
+            .progress-info { font-size: 0.8rem; }
+            .progress-info strong { font-size: 0.9rem; }
 
-            .scroll-list { max-height: 60px; }
-            .list-item { font-size: 0.6rem; padding: 2px 6px; }
+            /* Списки */
+            .scroll-list { max-height: 100px; }
+            .list-item { font-size: 0.8rem; padding: 4px 8px; }
 
-            .food-presets button { font-size: 0.5rem; padding: 1px 6px; }
+            /* Быстрые кнопки */
+            .food-presets button { font-size: 0.7rem; padding: 3px 10px; }
 
-            .info-row { font-size: 0.55rem; padding: 2px 0; }
+            /* Инфо-строки */
+            .info-row { font-size: 0.7rem; padding: 4px 0; }
 
-            .autocomplete-wrapper input { font-size: 0.65rem; padding: 3px 5px; }
-            .autocomplete-item { font-size: 0.6rem; padding: 3px 8px; }
-            .autocomplete-item .kcal { font-size: 0.55rem; }
+            /* Автодополнение */
+            .autocomplete-wrapper input { font-size: 0.9rem; padding: 8px 10px; }
+            .autocomplete-item { font-size: 0.8rem; padding: 6px 10px; }
+            .autocomplete-item .kcal { font-size: 0.7rem; }
 
-            .table-wrapper { max-height: 70px; }
-            table { font-size: 0.55rem; }
-            th, td { padding: 2px 4px; }
+            /* ===== НИЖНИЕ БЛОКИ — ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ ===== */
+            .bottom-section {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 10px;
+                padding-bottom: 8px;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                margin-bottom: 10px;
+            }
+            .bottom-section .card {
+                flex: 0 0 80%;
+                min-width: 250px;
+                padding: 12px 14px;
+                scroll-snap-align: start;
+            }
+            .bottom-section .card h2 { font-size: 0.9rem; }
 
-            .no-weight-notice { font-size: 0.55rem; padding: 3px 6px; }
+            /* Таблица в истории */
+            .table-wrapper { max-height: 120px; }
+            table { font-size: 0.7rem; }
+            th, td { padding: 4px 6px; }
 
-            .actions-row button { font-size: 0.6rem; padding: 3px 8px; }
+            .no-weight-notice { font-size: 0.7rem; padding: 6px 10px; }
+
+            .actions-row button { font-size: 0.8rem; padding: 6px 12px; }
         }
 
         @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr 1fr; }
-            .stat-value { font-size: 0.8rem; }
-            .stat-card { padding: 3px 3px; }
+            .stat-value { font-size: 1rem; }
+            .stat-card { padding: 4px 3px; }
+            .bottom-section .card { flex: 0 0 85%; min-width: 200px; }
         }
     </style>
 </head>
@@ -609,7 +552,7 @@
             </div>
             <div class="progress-info">
                 🎯 Цель: 5 кг<br>
-                <span style="font-size:0.8rem; color:#8D6E63;">Следи за дефицитом!</span>
+                <span style="font-size:0.75rem; color:#8D6E63;">Следи за дефицитом!</span>
             </div>
         </div>
 
@@ -661,6 +604,7 @@
         </div>
     </div>
 
+    <!-- НИЖНЯЯ СЕКЦИЯ — горизонтальный скролл на мобилках -->
     <div class="bottom-section">
         <div class="card">
             <h2>⚖️ Вес (опционально)</h2>
@@ -1027,7 +971,7 @@ function renderFoodUI() {
     } else {
         list.innerHTML = day.foods.map((f, i) => `
             <div class="list-item">
-                <span>${f.name} <span style="color:#8D6E63;font-size:0.6rem;">${f.weight}г</span></span>
+                <span>${f.name} <span style="color:#8D6E63;font-size:0.65rem;">${f.weight}г</span></span>
                 <span>${f.totalCalories} ккал <span class="remove-item" onclick="removeFood(${i})">✕</span></span>
             </div>
         `).join('');
