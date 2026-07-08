@@ -411,13 +411,11 @@
         @media (max-width: 768px) {
             body { padding: 8px; }
             
-            /* Три верхние колонки — вертикально */
             .three-columns { 
                 grid-template-columns: 1fr; 
                 gap: 8px;
             }
             
-            /* Статистика 2×2 */
             .stats-grid { 
                 grid-template-columns: 1fr 1fr; 
                 gap: 6px;
@@ -426,7 +424,6 @@
             .stat-value { font-size: 1.2rem; }
             .stat-label { font-size: 0.55rem; }
 
-            /* Шапка компактная */
             header { 
                 padding: 8px 12px; 
                 gap: 6px;
@@ -438,11 +435,9 @@
             .achievements { font-size: 0.7rem; padding: 2px 10px; }
             .theme-toggle { font-size: 0.7rem; padding: 4px 12px; }
 
-            /* Карточки */
             .card { padding: 10px 12px; }
             .card h2 { font-size: 0.95rem; margin-bottom: 6px; }
 
-            /* Поля ввода и кнопки — больше для пальцев */
             .form-row input { 
                 font-size: 0.9rem; 
                 padding: 8px 10px; 
@@ -454,23 +449,18 @@
             }
             .calc-hint { font-size: 0.65rem; }
 
-            /* Круг */
             .circle-chart-container { width: 100px; height: 100px; }
             .circle-text { font-size: 1.2rem; }
             .progress-info { font-size: 0.8rem; }
             .progress-info strong { font-size: 0.9rem; }
 
-            /* Списки */
             .scroll-list { max-height: 100px; }
             .list-item { font-size: 0.8rem; padding: 4px 8px; }
 
-            /* Быстрые кнопки */
             .food-presets button { font-size: 0.7rem; padding: 3px 10px; }
 
-            /* Инфо-строки */
             .info-row { font-size: 0.7rem; padding: 4px 0; }
 
-            /* Автодополнение */
             .autocomplete-wrapper input { font-size: 0.9rem; padding: 8px 10px; }
             .autocomplete-item { font-size: 0.8rem; padding: 6px 10px; }
             .autocomplete-item .kcal { font-size: 0.7rem; }
@@ -480,21 +470,33 @@
                 display: flex;
                 flex-wrap: nowrap;
                 overflow-x: auto;
-                gap: 10px;
-                padding-bottom: 8px;
+                gap: 12px;
+                padding-bottom: 10px;
                 -webkit-overflow-scrolling: touch;
                 scroll-snap-type: x mandatory;
                 margin-bottom: 10px;
+                scrollbar-width: thin;
             }
+            .bottom-section::-webkit-scrollbar {
+                height: 4px;
+            }
+            .bottom-section::-webkit-scrollbar-track {
+                background: #EFEBE9;
+                border-radius: 10px;
+            }
+            .bottom-section::-webkit-scrollbar-thumb {
+                background: #A1887F;
+                border-radius: 10px;
+            }
+
             .bottom-section .card {
-                flex: 0 0 80%;
-                min-width: 250px;
+                flex: 0 0 75%;
+                min-width: 240px;
                 padding: 12px 14px;
                 scroll-snap-align: start;
             }
             .bottom-section .card h2 { font-size: 0.9rem; }
 
-            /* Таблица в истории */
             .table-wrapper { max-height: 120px; }
             table { font-size: 0.7rem; }
             th, td { padding: 4px 6px; }
